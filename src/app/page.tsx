@@ -1,4 +1,7 @@
 import Image from "next/image";
+import { Textarea } from "@/components/ui/textarea";
+import { Button } from "@/components/ui/button";
+import { createPostAction } from "./actions/post";
 
 export default function Home() {
   return (
@@ -31,7 +34,14 @@ export default function Home() {
             <h1>ホーム</h1>
           </header>
           <main className="flex flex-col w-full">
-            <div className="grow border-b w-full h-20">ポストエリア</div>
+            <div className="grow border-b w-full h-24">
+              <form action={createPostAction}>
+                <Textarea className="border" name="content"></Textarea>
+                <Button className="bg-blue-500" type="submit">
+                  投稿
+                </Button>
+              </form>
+            </div>
             <div>
               <div>ポスト1</div>
               <div>ポスト1</div>
