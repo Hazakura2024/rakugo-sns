@@ -11,3 +11,61 @@ generator client {
 datasource db {
   provider = "postgresql"
 }
+
+model User {
+  id String @id @default(cuid())
+  username String @unique
+  name String
+  email String @unique
+  image String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  posts Post[]
+  likes Like[]
+
+  // 学習メモ: 2つのテーブル間に複数の関係があるとき、名付けをして識別する。
+  followers Follows[] @relation("following")
+  following Follows[] @relation("follower")
+}
+
+model Post {
+  id String @id @default(cuid())
+  content String @db.VarChar(280)// @db. でdb固有の型を作成
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  authorId String
+  author User @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  likes Like[]
+
+  parentId String? 
+  parent Post? @relation("Replies", fields: [parentId], references: [id])
+  replies Post[] @relation("Replies")
+}
+
+model Like {
+  id String @id @default(cuid())
+  createdAt DateTime @default(now())
+
+  userId String
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  postId String
+  post Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+
+  // 学習メモ: 同じアカウントが2回同じポストいいねできないように複合ユニーク制約
+  @@unique([userId, postId])
+}
+
+model Follows{
+  followerId String
+  follower User @relation("follower", fields: [followerId], references: [id], onDelete: Cascade)
+  followingId String
+  following User @relation("following", fields: [followingId], references: [id], onDelete: Cascade)
+
+  // 学習メモ: 同じ人を複数回フォローできないように複合主キーを設定
+  @@id([followerId, followingId])
+}
+
+
+
