@@ -3,7 +3,7 @@ import Image from "next/image";
 export default function Home() {
   return (
     <div className="flex flex-col min-h-screen bg-background text-foreground">
-      <header className="sticky bg- top-0 z-50 w-full border-b bg-background/95 backdrop-blur-md">
+      {/* <header className="sticky bg- top-0 z-50 w-full border-b bg-background/95 backdrop-blur-md">
         <div className="mx-auto flex h-14 max-w-7xl items-center justify-between px-4">
           <div>ロゴ</div>
           <nav className="flex items-center gap-4">
@@ -12,17 +12,43 @@ export default function Home() {
             <p>ページ３</p>
           </nav>
         </div>
-      </header>
-      <div className="mx-auto w-full max-w-7xl flex flex-1 items-start gap-6 px-4 py-6">
-        <aside className="sticky top-20 hidden w-64 shrink-0 md:block">
-          サイドバー
+      </header> */}
+      <div className="flex  flex-1">
+        <aside className="w-14 sticky flex flex-col items-center justify-start border-r gap-5">
+          <img src="/images/main_logo.png" alt="アイコン" className="p-1" />
+          <nav className="flex items-center flex-col gap-8 p-3">
+            <img src="/images/home.png" alt="" />
+            <img src="/images/hashtag.png" alt="" />
+            <img src="/images/notification.png" alt="" />
+            <img src="/images/message.png" alt="" />
+            <img src="/images/bookmark.png" alt="" />
+            <img src="/images/profile.png" alt="" />
+            <img src="/images/detail.png" alt="" />
+          </nav>
         </aside>
-        <main className="flex-1">
-          <div>
-            <div>メイン</div>
-            <div>内容</div>
+        <div className="mx-auto w-full max-w-7xl flex flex-1 flex-col items-start gap-6 py-6">
+          <header className="h-8 border-b w-full flex items-center">
+            <h1>ホーム</h1>
+          </header>
+          <main className="flex flex-col w-full">
+            <div className="grow border-b w-full h-20">ポストエリア</div>
+            <div>
+              <div>ポスト1</div>
+              <div>ポスト1</div>
+              <div>ポスト1</div>
+              <div>ポスト1</div>
+              <div>ポスト1</div>
+            </div>
+          </main>
+        </div>
+        <aside className="w-40 sticky flex flex-col items-center justify-start border-l gap-5 p-3">
+          <div className=" h-8 w-full rounded-sm bg-muted/50">
+            <div>🔍検索</div>
           </div>
-        </main>
+          <div className="h-40 w-full rounded-sm bg-muted/50">
+            <div></div>
+          </div>
+        </aside>
       </div>
       <footer className="border-t bg-muted/50 py-6 text-center text-sm text-muted-foreground">
         ライセンス
