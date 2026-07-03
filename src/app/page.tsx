@@ -2,64 +2,57 @@ import Image from "next/image";
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <div className="flex flex-col min-h-screen bg-background text-foreground">
+      {/* <header className="sticky bg- top-0 z-50 w-full border-b bg-background/95 backdrop-blur-md">
+        <div className="mx-auto flex h-14 max-w-7xl items-center justify-between px-4">
+          <div>ロゴ</div>
+          <nav className="flex items-center gap-4">
+            <p>ページ１</p>
+            <p>ページ２</p>
+            <p>ページ３</p>
+          </nav>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+      </header> */}
+      <div className="flex  flex-1">
+        <aside className="w-14 sticky flex flex-col items-center justify-start border-r gap-5">
+          <img src="/images/main_logo.png" alt="アイコン" className="p-1" />
+          <nav className="flex items-center flex-col gap-8 p-3">
+            <img src="/images/home.png" alt="" />
+            <img src="/images/hashtag.png" alt="" />
+            <img src="/images/notification.png" alt="" />
+            <img src="/images/message.png" alt="" />
+            <img src="/images/bookmark.png" alt="" />
+            <img src="/images/profile.png" alt="" />
+            <img src="/images/detail.png" alt="" />
+          </nav>
+        </aside>
+        <div className="mx-auto w-full max-w-7xl flex flex-1 flex-col items-start gap-6 py-6">
+          <header className="h-8 border-b w-full flex items-center">
+            <h1>ホーム</h1>
+          </header>
+          <main className="flex flex-col w-full">
+            <div className="grow border-b w-full h-20">ポストエリア</div>
+            <div>
+              <div>ポスト1</div>
+              <div>ポスト1</div>
+              <div>ポスト1</div>
+              <div>ポスト1</div>
+              <div>ポスト1</div>
+            </div>
+          </main>
         </div>
-      </main>
+        <aside className="w-40 sticky flex flex-col items-center justify-start border-l gap-5 p-3">
+          <div className=" h-8 w-full rounded-sm bg-muted/50">
+            <div>🔍検索</div>
+          </div>
+          <div className="h-40 w-full rounded-sm bg-muted/50">
+            <div></div>
+          </div>
+        </aside>
+      </div>
+      <footer className="border-t bg-muted/50 py-6 text-center text-sm text-muted-foreground">
+        ライセンス
+      </footer>
     </div>
   );
 }
