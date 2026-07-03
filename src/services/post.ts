@@ -5,3 +5,11 @@ export async function insertPost(content: string, authorId: string) {
     data: { content, authorId },
   });
 }
+
+export async function getAllPosts() {
+  return await prisma.post.findMany({
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
+}

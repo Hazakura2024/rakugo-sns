@@ -1,9 +1,10 @@
-import Image from "next/image";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import { createPostAction } from "./actions/post";
+import { createPostAction, getAllPostsAction } from "./actions/post";
+import { Post } from "@/generated/client";
 
-export default function Home() {
+export default async function Home() {
+  const posts = await getAllPostsAction();
   return (
     <div className="flex flex-col min-h-screen bg-background text-foreground">
       {/* <header className="sticky bg- top-0 z-50 w-full border-b bg-background/95 backdrop-blur-md">
@@ -43,6 +44,12 @@ export default function Home() {
               </form>
             </div>
             <div>
+              {posts.map((post) => (
+                <div key={post.id} className="border p-2">
+                  <div>{String(post.createdAt)}</div>
+                  <div>{post.content}</div>
+                </div>
+              ))}
               <div>ポスト1</div>
               <div>ポスト1</div>
               <div>ポスト1</div>
@@ -51,7 +58,7 @@ export default function Home() {
             </div>
           </main>
         </div>
-        <aside className="w-40 sticky flex flex-col items-center justify-start border-l gap-5 p-3">
+        <aside className="w-80 sticky flex flex-col items-center justify-start border-l gap-5 p-3">
           <div className=" h-8 w-full rounded-sm bg-muted/50">
             <div>🔍検索</div>
           </div>
