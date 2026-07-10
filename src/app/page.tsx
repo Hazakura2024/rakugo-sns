@@ -86,7 +86,7 @@ export default async function Home() {
             </div>
           </nav>
         </aside>
-        <div className="mx-auto w-full max-w-7xl flex flex-1 flex-col items-start gap-6 py-6">
+        <div className="mx-auto w-30 max-w-7xl flex flex-1 flex-col items-start gap-6 py-6">
           <header className="h-8 border-b w-full flex items-center">
             <h1>ホーム</h1>
           </header>
@@ -101,7 +101,7 @@ export default async function Home() {
             </div>
             <div>
               {posts.map((post) => (
-                <div key={post.id} className="border p-2 flex flex-col h-20">
+                <div key={post.id} className="border p-2 flex flex-col">
                   <div className="flex items-center gap-2">
                     <div className="relative w-12 h-12 ">
                       <Image
@@ -111,9 +111,9 @@ export default async function Home() {
                         className="rounded-[50%]"
                       />
                     </div>
-                    <div>
+                    <div className="flex-1 min-w-0">
                       <div>{String(post.createdAt)}</div>
-                      <div>{post.content}</div>
+                      <div className="break-words">{post.content}</div>
                     </div>
                   </div>
                   <div className="flex items-center justify-center gap-4">
