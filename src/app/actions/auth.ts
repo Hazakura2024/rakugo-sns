@@ -32,6 +32,7 @@ export async function signUpAction(
   formData: FormData,
 ): Promise<SignUpFormState> {
   const validationFields = signUpSchema.safeParse({
+    userName: formData.get("userName"),
     email: formData.get("email"),
     password: formData.get("password"),
   });
