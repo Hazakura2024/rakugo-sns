@@ -92,9 +92,9 @@ export default async function Home() {
           </header>
           <main className="flex flex-col w-full">
             <div className="grow border-b w-full h-24">
-              <form action={createPostAction}>
+              <form className="flex flex-col" action={createPostAction}>
                 <Textarea className="border" name="content"></Textarea>
-                <Button className="bg-blue-500" type="submit">
+                <Button className="bg-blue-500 self-end" type="submit">
                   投稿
                 </Button>
               </form>
