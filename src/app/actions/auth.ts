@@ -21,7 +21,10 @@ const loginSchema = z.object({
     .min(8, { message: "有効なパスワードを入力してください。" }),
 });
 
-export async function loginAction(formData: FormData): Promise<LoginFormState> {
+export async function loginAction(
+  prevState: LoginFormState,
+  formData: FormData,
+): Promise<LoginFormState> {
   const validationFields = loginSchema.safeParse({
     email: formData.get("email"),
     password: formData.get("password"),
@@ -37,6 +40,8 @@ export async function loginAction(formData: FormData): Promise<LoginFormState> {
   const { email, password } = validationFields.data;
 
   try {
+    console.log(email);
+    console.log(password);
     return { success: true };
   } catch (error) {
     return {
