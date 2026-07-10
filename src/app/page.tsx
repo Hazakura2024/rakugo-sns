@@ -8,19 +8,9 @@ export default async function Home() {
   const posts = await getAllPostsAction();
   return (
     <div className="flex flex-col min-h-screen bg-background text-foreground">
-      {/* <header className="sticky bg- top-0 z-50 w-full border-b bg-background/95 backdrop-blur-md">
-        <div className="mx-auto flex h-14 max-w-7xl items-center justify-between px-4">
-          <div>ロゴ</div>
-          <nav className="flex items-center gap-4">
-            <p>ページ１</p>
-            <p>ページ２</p>
-            <p>ページ３</p>
-          </nav>
-        </div>
-      </header> */}
       <div className="flex  flex-1">
         <aside className="w-14 sticky flex flex-col items-center justify-start border-r gap-5 w-4">
-          <div className="relative w-6 p-6">
+          <div className="relative w-8 p-8">
             <Image
               fill
               src="/images/main_logo.png"
@@ -29,7 +19,7 @@ export default async function Home() {
             />
           </div>
           <nav className="relative flex items-center flex-col gap-8 p-3">
-            <div className="relative w-6 p-6">
+            <div className="relative w-5 p-5">
               <Image
                 fill
                 className="object-contain"
@@ -37,7 +27,7 @@ export default async function Home() {
                 alt=""
               />
             </div>
-            <div className="relative w-6 p-6">
+            <div className="relative w-5 p-5">
               <Image
                 fill
                 className="object-contain"
@@ -45,7 +35,7 @@ export default async function Home() {
                 alt=""
               />
             </div>
-            <div className="relative w-6 p-6">
+            <div className="relative w-5 p-5">
               <Image
                 fill
                 className="object-contain"
@@ -53,7 +43,7 @@ export default async function Home() {
                 alt=""
               />
             </div>
-            <div className="relative w-6 p-6">
+            <div className="relative w-5 p-5">
               <Image
                 className="object-contain"
                 fill
@@ -61,7 +51,7 @@ export default async function Home() {
                 alt=""
               />
             </div>
-            <div className="relative w-6 p-6">
+            <div className="relative w-5 p-5">
               <Image
                 className="object-contain"
                 fill
@@ -69,7 +59,7 @@ export default async function Home() {
                 alt=""
               />
             </div>
-            <div className="relative w-6 p-6">
+            <div className="relative w-5 p-5">
               <Image
                 className="object-contain"
                 fill
@@ -77,7 +67,7 @@ export default async function Home() {
                 alt=""
               />
             </div>
-            <div className="relative w-6 p-6">
+            <div className="relative w-5 p-5">
               <Image
                 className="object-contain"
                 fill
