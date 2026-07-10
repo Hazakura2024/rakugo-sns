@@ -1,7 +1,62 @@
 "use server";
 
-import { error } from "console";
-import { success, z } from "zod";
+import { z } from "zod";
+
+export type SignUpFormState = {
+  success: boolean;
+  errors?: {
+    userName?: string[];
+    email?: string[];
+    password?: string[];
+  };
+  message?: string;
+} | null;
+
+const signUpSchema = z.object({
+  userName: z
+    .string()
+    .min(1, { message: "ユーザー名は1文字以上にしてください。" })
+    .max(20, { message: "ユーザー名は20文字以下にしてください" }),
+  email: z.string().email({
+    message: "有効なメールアドレスを入力してください",
+  }),
+  password: z
+    .string()
+    .min(8, { message: "パスワードは8文字以上にしてください。" })
+    .regex(/[A-Z]/, { message: "大文字を少なくとも1文字含めてください" })
+    .regex(/[0-9]/, { message: "数字を少なくとも1文字含めてください" }),
+});
+
+export async function signUpAction(
+  prevState: SignUpFormState,
+  formData: FormData,
+): Promise<SignUpFormState> {
+  const validationFields = signUpSchema.safeParse({
+    email: formData.get("email"),
+    password: formData.get("password"),
+  });
+
+  if (!validationFields.success) {
+    return {
+      success: false,
+      errors: z.flattenError(validationFields.error).fieldErrors,
+    };
+  }
+
+  const { userName, email, password } = validationFields.data;
+
+  try {
+    console.log(userName);
+    console.log(email);
+    console.log(password);
+    return { success: true };
+  } catch (error) {
+    return {
+      success: false,
+      message: "ログインに失敗しました。",
+    };
+  }
+}
 
 export type LoginFormState = {
   success: boolean;
