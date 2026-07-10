@@ -2,6 +2,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { createPostAction, getAllPostsAction } from "./actions/post";
 import Image from "next/image";
+import TimeDisplay from "@/components/ui/timeDisplay";
 
 export default async function Home() {
   const posts = await getAllPostsAction();
@@ -112,7 +113,7 @@ export default async function Home() {
                       />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <div>{String(post.createdAt)}</div>
+                      <TimeDisplay createdAt={post.createdAt}></TimeDisplay>
                       <div className="break-words">{post.content}</div>
                     </div>
                   </div>
