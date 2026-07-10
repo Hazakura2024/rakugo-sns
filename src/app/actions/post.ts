@@ -10,7 +10,8 @@ export async function createPostAction(formData: FormData) {
   // 手動作成した仮ユーザー
   const authorId = "clyja2ddb000101k93m6a0h6c";
 
-  revalidatePath("/");
+  // Data Cacheにはデフォルトのtagとして、Route情報を元にしたタグが内部的に設定されており、revalidatePath()はこの特殊なタグを元に関連するData Cacheのrevalidateを実現しています。
+  revalidatePath('/')
 
   try {
     const res = await insertPost(content, authorId);
