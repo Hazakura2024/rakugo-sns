@@ -2,6 +2,16 @@
 
 import { error } from "console";
 import { success, z } from "zod";
+
+export type LoginFormState = {
+  success: boolean;
+  errors?: {
+    email?: string[];
+    password?: string[];
+  };
+  message?: string;
+} | null;
+
 const loginSchema = z.object({
   email: z.string().email({
     message: "有効なメールアドレスを入力してください",
@@ -11,7 +21,7 @@ const loginSchema = z.object({
     .min(8, { message: "有効なパスワードを入力してください。" }),
 });
 
-export async function loginAction(formData: FormData) {
+export async function loginAction(formData: FormData): Promise<LoginFormState> {
   const validationFields = loginSchema.safeParse({
     email: formData.get("email"),
     password: formData.get("password"),
@@ -20,7 +30,7 @@ export async function loginAction(formData: FormData) {
   if (!validationFields.success) {
     return {
       success: false,
-      error: validationFields.success,
+      errors: z.flattenError(validationFields.error).fieldErrors,
     };
   }
 
