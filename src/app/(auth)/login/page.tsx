@@ -22,7 +22,7 @@ export default function LoginPage() {
           <div>
             <form className="flex flex-col space-y-6">
               <div className="space-y-2">
-                <Label></Label>
+                <Label htmlFor="email"></Label>
                 <Input
                   id="email"
                   name="email"
@@ -32,7 +32,7 @@ export default function LoginPage() {
                 {}
               </div>
               <div className="space-y-2">
-                <Label></Label>
+                <Label htmlFor="password"></Label>
                 <Input
                   id="password"
                   name="password"
