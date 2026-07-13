@@ -1,6 +1,7 @@
 "use server";
 
 import { createClient } from "@/lib/supabase/server";
+import { redirect } from "next/navigation";
 import { z } from "zod";
 
 export type SignUpFormState = {
@@ -48,24 +49,26 @@ export async function signUpAction(
   const { userName, email, password } = validationFields.data;
 
   try {
-    // console.log(userName);
-    // console.log(email);
-    // console.log(password);
 
-    const supabase = await createClient()
+    const supabase = await createClient();
 
-    const {data, error} = await supabase.auth.signUp({
-        email,
-        password,
-    })
-    
-    return { success: true };
+    const { data, error } = await supabase.auth.signUp({
+      email,
+      password,
+    });
+
+    if (error) {
+      console.error("Supabase Auth Error:", error);
+    }
+
   } catch (error) {
     return {
       success: false,
-      message: "ログインに失敗しました。",
+      message: String(error),
     };
   }
+
+  redirect("/");
 }
 
 export type LoginFormState = {
@@ -107,11 +110,12 @@ export async function loginAction(
   try {
     console.log(email);
     console.log(password);
-    return { success: true };
   } catch (error) {
     return {
       success: false,
       message: "ログインに失敗しました。",
     };
   }
+
+  redirect("/");
 }

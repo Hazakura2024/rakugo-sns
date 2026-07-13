@@ -22,7 +22,7 @@ export default function SignUpPage() {
       <div className="text-5xl font-bold">すべての話題が、ここに。</div>
       <Card>
         <CardHeader>
-          <CardTitle className="text-xl">ログイン</CardTitle>
+          <CardTitle className="text-xl">新規登録</CardTitle>
         </CardHeader>
         <CardContent>
           <div>
@@ -71,7 +71,7 @@ export default function SignUpPage() {
                 )}
               </div>
               <Button className="bg-blue-500" disabled={isPending}>
-                ログイン
+                新規登録
               </Button>
             </form>
           </div>
