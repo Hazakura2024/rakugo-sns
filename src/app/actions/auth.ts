@@ -1,5 +1,6 @@
 "use server";
 
+import { createClient } from "@/lib/supabase/server";
 import { z } from "zod";
 
 export type SignUpFormState = {
@@ -47,9 +48,17 @@ export async function signUpAction(
   const { userName, email, password } = validationFields.data;
 
   try {
-    console.log(userName);
-    console.log(email);
-    console.log(password);
+    // console.log(userName);
+    // console.log(email);
+    // console.log(password);
+
+    const supabase = await createClient()
+
+    const {data, error} = await supabase.auth.signUp({
+        email,
+        password,
+    })
+    
     return { success: true };
   } catch (error) {
     return {
