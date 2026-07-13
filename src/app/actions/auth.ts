@@ -49,22 +49,25 @@ export async function signUpAction(
   const { userName, email, password } = validationFields.data;
 
   try {
-
     const supabase = await createClient();
 
     const { data, error } = await supabase.auth.signUp({
       email,
       password,
+      options: {
+        data: {
+          username: userName,
+        },
+      },
     });
 
     if (error) {
       console.error("Supabase Auth Error:", error);
     }
-
   } catch (error) {
     return {
       success: false,
-      message: String(error),
+      message: "ログインに失敗",
     };
   }
 
