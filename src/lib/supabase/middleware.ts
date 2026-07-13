@@ -1,7 +1,7 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function updateSection(request: NextRequest) {
+export async function updateSession(request: NextRequest) {
   let supabaseResponse = NextResponse.next({
     request: {
       headers: request.headers,
@@ -27,6 +27,10 @@ export async function updateSection(request: NextRequest) {
           supabaseResponse = NextResponse.next({
             request,
           });
+
+          cookiesToSet.forEach(({ name, value, options }) =>
+            supabaseResponse.cookies.set(name, value, options),
+          );
         },
       },
     },
@@ -39,12 +43,10 @@ export async function updateSection(request: NextRequest) {
   // 学習メモ: ログインしてたらメイン、してなかったらログインページの制御
   const pathname = request.nextUrl.pathname;
 
-  const protectedRoutes = ["/"];
-  const isProtectedRoute = protectedRoutes.some((route) =>
-    pathname.startsWith(route),
-  );
+  //   const protectedRoutes = pathname === "/";
+  const isProtectedRoute = pathname === "/";
 
-  const authRoutes = ["/login", "signup"];
+  const authRoutes = ["/login", "/signup"];
   const isAuthRoute = authRoutes.includes(pathname);
 
   if (!user && isProtectedRoute) {
