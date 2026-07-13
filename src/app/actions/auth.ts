@@ -111,8 +111,19 @@ export async function loginAction(
   const { email, password } = validationFields.data;
 
   try {
-    console.log(email);
-    console.log(password);
+    const supabase = createClient();
+
+    const { data, error } = (await supabase).auth.signInWithPassword({
+      email,
+      password,
+    });
+    if (error) {
+      return {
+        success: false,
+        message: "メールアドレスかパスワードが間違っています。"
+      }
+    }
+
   } catch (error) {
     return {
       success: false,
