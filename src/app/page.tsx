@@ -1,15 +1,18 @@
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { createPostAction, getAllPostsAction } from "./actions/post";
+import { Heart } from "lucide-react";
+import { Repeat } from "lucide-react";
 import Image from "next/image";
 import TimeDisplay from "@/components/ui/timeDisplay";
+import { PostCard } from "@/components/PostCard";
 
 export default async function Home() {
   const posts = await getAllPostsAction();
   return (
-    <div className="flex flex-col min-h-screen bg-background text-foreground">
-      <div className="flex  flex-1">
-        <aside className="w-14 sticky flex flex-col items-center justify-start border-r gap-5 w-4">
+    <div className="flex flex-col h-screen overflow-hidden bg-background text-foreground">
+      <div className="flex  flex-1 overflow-hidden">
+        <aside className="w-14 flex flex-col items-center justify-start border-r gap-5 w-4">
           <div className="relative w-8 p-8">
             <Image
               fill
@@ -77,60 +80,30 @@ export default async function Home() {
             </div>
           </nav>
         </aside>
-        <div className="mx-auto w-30 max-w-7xl flex flex-1 flex-col items-start gap-6 py-6">
-          <header className="h-8 border-b w-full flex items-center">
+        <div className="flex flex-1 flex-col items-start min-w-0 gap-6 py-6 overflow-y-auto">
+          <header className="border-b w-full z-10 flex flex-col items-center shrink-0 sticky top-0 bg-background">
             <h1>ホーム</h1>
-          </header>
-          <main className="flex flex-col w-full">
-            <div className="grow border-b w-full h-24">
-              <form className="flex flex-col" action={createPostAction}>
+            <div className="shrink-0 border-b w-full h-24">
+              <form
+                className="flex flex-col  bg-background"
+                action={createPostAction}
+              >
                 <Textarea className="border" name="content"></Textarea>
                 <Button className="bg-blue-500 self-end" type="submit">
                   投稿
                 </Button>
               </form>
             </div>
+          </header>
+          <main className="flex flex-col w-full">
             <div>
               {posts.map((post) => (
-                <div key={post.id} className="border p-2 flex flex-col">
-                  <div className="flex items-center gap-2">
-                    <div className="relative w-12 h-12 ">
-                      <Image
-                        fill
-                        src="/images/mock_icon.png"
-                        alt=""
-                        className="rounded-[50%]"
-                      />
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <TimeDisplay createdAt={post.createdAt}></TimeDisplay>
-                      <div className="break-words">{post.content}</div>
-                    </div>
-                  </div>
-                  <div className="flex items-center justify-center gap-4">
-                    <div className="flex">
-                      <div>いいね</div>
-                      <div>0</div>
-                    </div>
-
-                    <div className="relative flex items-center">
-                      <div className="relative h-5 w-5 ">
-                        <Image
-                          fill
-                          className=""
-                          src="/images/miyabi.png"
-                          alt=""
-                        />
-                      </div>
-                      <div>0</div>
-                    </div>
-                  </div>
-                </div>
+                <PostCard key={post.id} post={post}></PostCard>
               ))}
             </div>
           </main>
         </div>
-        <aside className="w-90 sticky flex flex-col items-center justify-start border-l gap-5 p-3">
+        <aside className="hidden w-80 md:flex flex-col items-center justify-start border-l gap-5 p-3 insert-y-0 right-0 ">
           <div className=" h-8 w-full rounded-sm bg-muted/50">
             <div>🔍検索</div>
           </div>
