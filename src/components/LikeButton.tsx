@@ -16,7 +16,7 @@ export function LikeButton() {
     <div className="flex w-12">
       <button onClick={handleLike}>
         <Heart
-          className={`h-5 w-5 mx-1 ${isLiked ? "text-red-500 fill-red-500" : ""}`}
+          className={`h-5 w-5 mx-1 transition-all duration-300 ease-out active:scale-95 ${isLiked ? "text-red-500 fill-red-500" : ""}`}
         ></Heart>
       </button>
       {/* <div className="relative h-5 w-5 ">
