@@ -63,6 +63,10 @@ export async function signUpAction(
 
     if (error) {
       console.error("Supabase Auth Error:", error);
+      return {
+        success: false,
+        message: "登録に失敗しました。",
+      };
     }
   } catch (error) {
     return {
@@ -120,10 +124,9 @@ export async function loginAction(
     if (error) {
       return {
         success: false,
-        message: "メールアドレスかパスワードが間違っています。"
-      }
+        message: "メールアドレスかパスワードが間違っています。",
+      };
     }
-
   } catch (error) {
     return {
       success: false,

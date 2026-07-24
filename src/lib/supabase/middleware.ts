@@ -15,9 +15,9 @@ export async function updateSession(request: NextRequest) {
     {
       cookies: {
         getAll() {
-          return request.cookies.getAll();
+          return request.cookies.getAll();// クッキー持ってるか？取り出す
         },
-        setAll(cookiesToSet) {
+        setAll(cookiesToSet) {// 学習メモ: supabaseに渡して確認してもらう
           // 学習メモ: まず受け取ったリクエスト自体の中身を新しいcookieで上書きする
           cookiesToSet.forEach(({ name, value }) =>
             request.cookies.set(name, value),
