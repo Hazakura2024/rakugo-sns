@@ -22,7 +22,7 @@ export async function PostCard({ post }: { post: Post }) {
           <div className="break-words">{post.content}</div>
         </div>
       </div>
-      <div className="flex items-center justify-center gap-4">
+      <div className="h-5 flex items-center justify-center gap-4">
         <LikeButton></LikeButton>
 
         <RepostButton></RepostButton>

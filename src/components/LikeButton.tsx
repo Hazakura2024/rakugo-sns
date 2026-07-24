@@ -13,16 +13,16 @@ export function LikeButton() {
     setLikesCount((prev) => (isLiked ? prev - 1 : prev + 1));
   };
   return (
-    <div className="flex">
+    <div className="flex w-12">
       <button onClick={handleLike}>
         <Heart
-          className={`h-5 w-5 ${isLiked ? "text-red-500 fill-red-500" : ""}`}
+          className={`h-5 w-5 mx-1 ${isLiked ? "text-red-500 fill-red-500" : ""}`}
         ></Heart>
       </button>
       {/* <div className="relative h-5 w-5 ">
                         <Image fill className="" src="/images/iki.png" alt="" />
                       </div> */}
-      <div>{likesCount}</div>
+      {likesCount !== 0 ? <div>{likesCount}</div> : null}
     </div>
   );
 }
