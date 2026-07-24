@@ -3,6 +3,7 @@ import TimeDisplay from "./ui/timeDisplay";
 import { Heart, Repeat } from "lucide-react";
 import { Post } from "@/generated/client";
 import { LikeButton } from "./LikeButton";
+import { RepostButton } from "./RepostButton";
 
 export async function PostCard({ post }: { post: Post }) {
   return (
@@ -24,18 +25,7 @@ export async function PostCard({ post }: { post: Post }) {
       <div className="flex items-center justify-center gap-4">
         <LikeButton></LikeButton>
 
-        <div className="relative flex items-center">
-          <Repeat className="h-5 w-5"></Repeat>
-          {/* <div className="relative h-5 w-5 ">
-                        <Image
-                          fill
-                          className=""
-                          src="/images/miyabi.png"
-                          alt=""
-                        />
-                      </div> */}
-          <div>0</div>
-        </div>
+        <RepostButton></RepostButton>
       </div>
     </div>
   );
