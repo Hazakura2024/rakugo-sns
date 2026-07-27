@@ -71,7 +71,7 @@ export async function signUpAction(
   } catch (error) {
     return {
       success: false,
-      message: "ログインに失敗",
+      message: "登録に失敗",
     };
   }
 

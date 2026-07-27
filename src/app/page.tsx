@@ -1,14 +1,19 @@
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import { createPostAction, getAllPostsAction } from "./actions/post";
-import { Heart } from "lucide-react";
-import { Repeat } from "lucide-react";
+import { createPostAction } from "./actions/post";
 import Image from "next/image";
-import TimeDisplay from "@/components/ui/timeDisplay";
 import { PostCard } from "@/components/PostCard";
+import { createClient } from "@/lib/supabase/server";
+import { getPostWithLikeStatus } from "@/services/post";
 
 export default async function Home() {
-  const posts = await getAllPostsAction();
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  const posts = await getPostWithLikeStatus(user?.id);
+
   return (
     <div className="flex flex-col h-screen overflow-hidden bg-background text-foreground">
       <div className="flex  flex-1 overflow-hidden">
@@ -98,7 +103,7 @@ export default async function Home() {
           <main className="flex flex-col w-full">
             <div>
               {posts.map((post) => (
-                <PostCard key={post.id} post={post}></PostCard>
+                <PostCard key={post.id} userId={user?.id} post={post}></PostCard>
               ))}
             </div>
           </main>

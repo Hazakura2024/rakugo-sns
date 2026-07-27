@@ -1,11 +1,19 @@
 import Image from "next/image";
 import TimeDisplay from "./ui/timeDisplay";
 import { Heart, Repeat } from "lucide-react";
-import { Post } from "@/generated/client";
+import { Post, User } from "@/generated/client";
 import { LikeButton } from "./LikeButton";
 import { RepostButton } from "./RepostButton";
+import { PostWithLikeStatus } from "@/types/post";
 
-export async function PostCard({ post }: { post: Post }) {
+export async function PostCard({
+  userId,
+  post,
+}: {
+  userId: string;
+  post: PostWithLikeStatus;
+}) {
+
   return (
     <div className="border p-2 flex flex-col">
       <div className="flex items-center gap-2">
@@ -23,7 +31,7 @@ export async function PostCard({ post }: { post: Post }) {
         </div>
       </div>
       <div className="h-5 flex items-center justify-center gap-4">
-        <LikeButton></LikeButton>
+        <LikeButton userId={userId} post={post}></LikeButton>
 
         <RepostButton></RepostButton>
       </div>
