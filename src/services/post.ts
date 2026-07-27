@@ -1,4 +1,5 @@
 import prisma from "@/lib/prisma";
+import { tr } from "zod/v4/locales";
 
 export async function insertPost(content: string, authorId: string) {
   return await prisma.post.create({
@@ -12,4 +13,28 @@ export async function getAllPosts() {
       createdAt: "desc",
     },
   });
+}
+
+export async function getPostWithLikeStatus(currentUserId?: string) {
+  const posts = await prisma.post.findMany({
+    orderBy: { createdAt: "desc" },
+    include: {
+      _count: {
+        select: {
+          likes: true,
+        },
+      },
+      likes: currentUserId
+        ? {
+            where: { userId: currentUserId },
+            select: { userId: true },
+          }
+        : false,
+    },
+  });
+  return posts.map((post) => ({
+    ...post,
+    likesCount: post._count.likes,
+    isLiked: post.likes ? post.likes.length > 0 : false,
+  }));
 }
