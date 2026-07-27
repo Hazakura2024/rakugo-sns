@@ -5,6 +5,7 @@ import Image from "next/image";
 import { PostCard } from "@/components/PostCard";
 import { createClient } from "@/lib/supabase/server";
 import { getPostWithLikeStatus } from "@/services/post";
+import Link from "next/link";
 
 export default async function Home() {
   const supabase = await createClient();
@@ -76,12 +77,14 @@ export default async function Home() {
               />
             </div>
             <div className="relative w-5 p-5">
-              <Image
-                className="object-contain"
-                fill
-                src="/images/detail.png"
-                alt=""
-              />
+              <Link href="/setting">
+                <Image
+                  className="object-contain"
+                  fill
+                  src="/images/detail.png"
+                  alt=""
+                />
+              </Link>
             </div>
           </nav>
         </aside>
@@ -103,7 +106,11 @@ export default async function Home() {
           <main className="flex flex-col w-full">
             <div>
               {posts.map((post) => (
-                <PostCard key={post.id} userId={user?.id} post={post}></PostCard>
+                <PostCard
+                  key={post.id}
+                  userId={user?.id}
+                  post={post}
+                ></PostCard>
               ))}
             </div>
           </main>
