@@ -1,6 +1,7 @@
 "use server";
 
 import { createClient } from "@/lib/supabase/server";
+import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { z } from "zod";
 
@@ -115,9 +116,9 @@ export async function loginAction(
   const { email, password } = validationFields.data;
 
   try {
-    const supabase = createClient();
+    const supabase = await createClient();
 
-    const { data, error } = (await supabase).auth.signInWithPassword({
+    const { data, error } = await supabase.auth.signInWithPassword({
       email,
       password,
     });
@@ -133,6 +134,19 @@ export async function loginAction(
       message: "ログインに失敗しました。",
     };
   }
+  revalidatePath("/", "layout");
 
   redirect("/");
+}
+
+export async function logoutAction() {
+  const supabase = await createClient();
+  const { error } = await supabase.auth.signOut();
+  if (error) {
+    console.error("ログアウトエラー", error.message);
+    throw new Error("ログアウトに失敗しました。");
+  }
+
+  revalidatePath("/");
+  redirect("/login");
 }
