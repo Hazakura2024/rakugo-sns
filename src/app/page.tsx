@@ -88,9 +88,9 @@ export default async function Home() {
             </div>
           </nav>
         </aside>
-        <div className="flex flex-1 flex-col items-start min-w-0 gap-6 py-6 overflow-y-auto">
+        <div className="flex flex-1 flex-col items-start min-w-0  overflow-y-auto">
           <header className="border-b w-full z-10 flex flex-col items-center shrink-0 sticky top-0 bg-background">
-            <h1>ホーム</h1>
+            <h1 className="w-full text-left">ホーム</h1>
             <div className="shrink-0 border-b w-full h-24">
               <form
                 className="flex flex-col  bg-background"

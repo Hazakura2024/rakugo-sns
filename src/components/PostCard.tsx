@@ -13,7 +13,6 @@ export async function PostCard({
   userId: string;
   post: PostWithLikeStatus;
 }) {
-
   return (
     <div className="border p-2 flex flex-col">
       <div className="flex items-center gap-2">
@@ -26,7 +25,11 @@ export async function PostCard({
           />
         </div>
         <div className="flex-1 min-w-0">
-          <TimeDisplay createdAt={post.createdAt}></TimeDisplay>
+          <div className="flex gap-4">
+            <div>{post.author.username}</div>
+            <TimeDisplay createdAt={post.createdAt}></TimeDisplay>
+          </div>
+
           <div className="break-words">{post.content}</div>
         </div>
       </div>
