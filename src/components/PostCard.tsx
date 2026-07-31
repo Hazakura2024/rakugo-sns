@@ -25,8 +25,9 @@ export async function PostCard({
           />
         </div>
         <div className="flex-1 min-w-0">
-          <div className="flex gap-4">
-            <div>{post.author.username}</div>
+          <div className="flex gap-1">
+            <div>{post.author.name}</div>
+            <div className="text-gray-500">@{post.author.username}</div>
             <TimeDisplay createdAt={post.createdAt}></TimeDisplay>
           </div>
 
