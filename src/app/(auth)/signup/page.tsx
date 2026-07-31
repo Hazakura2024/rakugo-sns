@@ -28,20 +28,6 @@ export default function SignUpPage() {
           <div>
             <form action={formAction} className="flex flex-col space-y-6">
               <div className="space-y-2">
-                <Label htmlFor="userName"></Label>
-                <Input
-                  id="userName"
-                  name="userName"
-                  type="userName"
-                  placeholder="ユーザー名"
-                ></Input>
-                {state?.errors?.userName && (
-                  <p className="text-sm text-red-500">
-                    {state.errors.userName[0]}
-                  </p>
-                )}
-              </div>
-              <div className="space-y-2">
                 <Label htmlFor="email"></Label>
                 <Input
                   id="email"

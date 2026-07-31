@@ -78,7 +78,7 @@ export type LoginFormState = {
 } | null;
 
 const loginSchema = z.object({
-  email: z.string().email({
+  email: z.email({
     message: "有効なメールアドレスを入力してください",
   }),
   password: z

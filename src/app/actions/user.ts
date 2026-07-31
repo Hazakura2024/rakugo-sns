@@ -4,6 +4,7 @@ import { z } from "zod";
 
 import { authActionClient } from "@/lib/safe-action";
 import { existingUser, setUpUserName } from "@/services/user";
+import { redirect } from "next/navigation";
 
 const updateProfileSchema = z.object({
   username: z
@@ -17,7 +18,7 @@ const updateProfileSchema = z.object({
     .max(20, { message: "ユーザー名は20文字以下にしてください" }),
 });
 
-const setUpAccountNameAction = authActionClient
+export const setUpAccountNameAction = authActionClient
   .inputSchema(updateProfileSchema)
   .action(async ({ parsedInput, ctx }) => {
     const existUser = await existingUser(parsedInput.username);
@@ -27,4 +28,6 @@ const setUpAccountNameAction = authActionClient
     }
 
     setUpUserName(ctx.userId, parsedInput.username, parsedInput.name);
+
+    redirect("/");
   });
