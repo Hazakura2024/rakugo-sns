@@ -6,13 +6,13 @@ import { Button } from "./ui/button";
 import { Textarea } from "./ui/textarea";
 
 export function CreatePostForm() {
-  const { execute, isExecuting } = useAction(createPostAction);
+  const { executeAsync, isExecuting } = useAction(createPostAction);
 
-  const handleAction = (formData: FormData) => {
+  const handleAction = async (formData: FormData) => {
     if (isExecuting) return;
     const content = formData.get("content") as string;
 
-    execute({ content });
+    await executeAsync({ content });
   };
 
   return (
