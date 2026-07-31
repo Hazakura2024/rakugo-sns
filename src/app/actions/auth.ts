@@ -8,7 +8,6 @@ import { z } from "zod";
 export type SignUpFormState = {
   success: boolean;
   errors?: {
-    userName?: string[];
     email?: string[];
     password?: string[];
   };
@@ -16,10 +15,6 @@ export type SignUpFormState = {
 } | null;
 
 const signUpSchema = z.object({
-  userName: z
-    .string()
-    .min(1, { message: "ユーザー名は1文字以上にしてください。" })
-    .max(20, { message: "ユーザー名は20文字以下にしてください" }),
   email: z.email({
     message: "有効なメールアドレスを入力してください",
   }),
@@ -35,7 +30,6 @@ export async function signUpAction(
   formData: FormData,
 ): Promise<SignUpFormState> {
   const validationFields = signUpSchema.safeParse({
-    userName: formData.get("userName"),
     email: formData.get("email"),
     password: formData.get("password"),
   });
@@ -47,7 +41,7 @@ export async function signUpAction(
     };
   }
 
-  const { userName, email, password } = validationFields.data;
+  const { email, password } = validationFields.data;
 
   try {
     const supabase = await createClient();
@@ -55,11 +49,6 @@ export async function signUpAction(
     const { data, error } = await supabase.auth.signUp({
       email,
       password,
-      options: {
-        data: {
-          username: userName,
-        },
-      },
     });
 
     if (error) {
@@ -76,7 +65,7 @@ export async function signUpAction(
     };
   }
 
-  redirect("/");
+  redirect("/onboarding");
 }
 
 export type LoginFormState = {
