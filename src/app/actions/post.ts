@@ -5,6 +5,7 @@ import { Post } from "@/generated/client";
 import { getAllPosts, insertPost } from "@/services/post";
 import { revalidatePath } from "next/cache";
 import { error } from "console";
+import { createClient } from "@/lib/supabase/server";
 
 const postSchema = z.object({
   content: z
@@ -28,8 +29,21 @@ export async function createPostAction(formData: FormData) {
 
   const { content } = validationFields.data;
 
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) {
+    return {
+      success: false,
+      errors: "undefined user",
+      message: "入力内容にエラーがあります",
+    };
+  }
+
   // 手動作成した仮ユーザー
-  const authorId = "clyja2ddb000101k93m6a0h6c";
+  const authorId = user?.id;
 
   try {
     const res = await insertPost(content, authorId);
