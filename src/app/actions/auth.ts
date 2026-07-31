@@ -20,7 +20,7 @@ const signUpSchema = z.object({
     .string()
     .min(1, { message: "ユーザー名は1文字以上にしてください。" })
     .max(20, { message: "ユーザー名は20文字以下にしてください" }),
-  email: z.string().email({
+  email: z.email({
     message: "有効なメールアドレスを入力してください",
   }),
   password: z
@@ -72,7 +72,7 @@ export async function signUpAction(
   } catch (error) {
     return {
       success: false,
-      message: "登録に失敗",
+      message: "登録に失敗しました。",
     };
   }
 
