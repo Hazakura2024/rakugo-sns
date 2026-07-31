@@ -6,6 +6,7 @@ import { PostCard } from "@/components/PostCard";
 import { createClient } from "@/lib/supabase/server";
 import { getPostWithLikeStatus } from "@/services/post";
 import Link from "next/link";
+import { CreatePostForm } from "@/components/CreatePostForm";
 
 export default async function Home() {
   const supabase = await createClient();
@@ -92,15 +93,7 @@ export default async function Home() {
           <header className="border-b w-full z-10 flex flex-col items-center shrink-0 sticky top-0 bg-background">
             <h1 className="w-full text-left">ホーム</h1>
             <div className="shrink-0 border-b w-full h-24">
-              <form
-                className="flex flex-col  bg-background"
-                action={createPostAction}
-              >
-                <Textarea className="border" name="content"></Textarea>
-                <Button className="bg-blue-500 self-end" type="submit">
-                  投稿
-                </Button>
-              </form>
+              <CreatePostForm></CreatePostForm>
             </div>
           </header>
           <main className="flex flex-col w-full">
