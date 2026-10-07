@@ -41,3 +41,32 @@ export async function getPostWithLikeStatus(currentUserId?: string) {
     isLiked: post.likes ? post.likes.length > 0 : false,
   }));
 }
+
+export async function getPostsByAuthorWithLikeStatus(authorId: string, currentUserId?: string) {
+  const posts = await prisma.post.findMany({
+    where: { authorId }, // 特定のユーザーで絞り込み
+    orderBy: { createdAt: "desc" },
+    include: {
+      author: {
+        select: { id: true, name: true, username: true, image: true },
+      },
+      _count: {
+        select: {
+          likes: true,
+        },
+      },
+      likes: currentUserId
+        ? {
+            where: { userId: currentUserId },
+            select: { userId: true },
+          }
+        : false,
+    },
+  });
+  
+  return posts.map((post) => ({
+    ...post,
+    likesCount: post._count.likes,
+    isLiked: post.likes ? post.likes.length > 0 : false,
+  }));
+}
