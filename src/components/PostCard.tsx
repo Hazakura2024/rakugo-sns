@@ -5,6 +5,7 @@ import { Post, User } from "@/generated/client";
 import { LikeButton } from "./LikeButton";
 import { RepostButton } from "./RepostButton";
 import { PostWithLikeStatus } from "@/types/post";
+import Link from "next/link";
 
 export async function PostCard({
   userId,
@@ -26,7 +27,10 @@ export async function PostCard({
         </div>
         <div className="flex-1 min-w-0">
           <div className="flex gap-1">
-            <div>{post.author.name}</div>
+            <Link href={"/" + post.author.username}>
+              <div className="hover:underline">{post.author.name}</div>
+            </Link>
+
             <div className="text-gray-500">@{post.author.username}</div>
             <TimeDisplay createdAt={post.createdAt}></TimeDisplay>
           </div>
